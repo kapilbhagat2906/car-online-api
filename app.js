@@ -4,8 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var dbInstance = require('./mongoose');
 
-var car = require('./routes/car/carRoutes');
+var cars = require('./routes/cars/carsRoutes');
 var brands = require('./routes/brands/brandsRoutes');
 
 var app = express();
@@ -22,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', car);
+app.use('/cars', cars);
 app.use('/brands', brands);
 
 // catch 404 and forward to error handler

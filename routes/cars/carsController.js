@@ -1,4 +1,4 @@
-var carModel = require('./carModel.js');
+var carsModel = require('./carsModel.js');
 
 /**
  * carController.js
@@ -11,7 +11,7 @@ module.exports = {
      * carController.list()
      */
     list: function (req, res) {
-        carModel.find(function (err, cars) {
+        carsModel.find(function (err, cars) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting car.',
@@ -27,7 +27,7 @@ module.exports = {
      */
     show: function (req, res) {
         var id = req.params.id;
-        carModel.findOne({_id: id}, function (err, car) {
+        carsModel.findOne({_id: id}, function (err, car) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting car.',
@@ -47,7 +47,7 @@ module.exports = {
      * carController.create()
      */
     create: function (req, res) {
-        var car = new carModel({
+        var car = new carsModel({
 			id : req.body.id,
 			name : req.body.name,
 			code : req.body.code,
@@ -75,7 +75,7 @@ module.exports = {
      */
     update: function (req, res) {
         var id = req.params.id;
-        carModel.findOne({_id: id}, function (err, car) {
+        carsModel.findOne({_id: id}, function (err, car) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting car',
@@ -96,7 +96,7 @@ module.exports = {
 			car.field_cover_image = req.body.field_cover_image ? req.body.field_cover_image : car.field_cover_image;
 			car.models = req.body.models ? req.body.models : car.models;
 			car.related = req.body.related ? req.body.related : car.related;
-			
+
             car.save(function (err, car) {
                 if (err) {
                     return res.status(500).json({
@@ -115,7 +115,7 @@ module.exports = {
      */
     remove: function (req, res) {
         var id = req.params.id;
-        carModel.findByIdAndRemove(id, function (err, car) {
+        carsModel.findByIdAndRemove(id, function (err, car) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when deleting the car.',
