@@ -4,10 +4,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var dbInstance = require('./mongoose');
+var mongodb = require('./mongoose');
+
+mongodb.init();
 
 var cars = require('./routes/cars/carsRoutes');
 var brands = require('./routes/brands/brandsRoutes');
+var highlights = require('./routes/highlights/highlightsRoutes');
+var models = require('./routes/models/modelsRoutes');
+var variants = require('./routes/variants/variantsRoutes');
+var colors = require('./routes/colors/colorsRoutes');
 
 var app = express();
 
@@ -25,23 +31,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/cars', cars);
 app.use('/brands', brands);
+app.use('/api/highlights', highlights);
+app.use('/models', models);
+app.use('/variants', variants);
+app.use('/colors', colors);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;

@@ -1,15 +1,15 @@
 var carsModel = require('./carsModel.js');
 
 /**
- * carController.js
- *
- * @description :: Server-side logic for managing cars.
- */
+* carController.js
+*
+* @description :: Server-side logic for managing cars.
+*/
 module.exports = {
 
     /**
-     * carController.list()
-     */
+    * carController.list()
+    */
     list: function (req, res) {
         carsModel.find(function (err, cars) {
             if (err) {
@@ -23,8 +23,8 @@ module.exports = {
     },
 
     /**
-     * carController.show()
-     */
+    * carController.show()
+    */
     show: function (req, res) {
         var id = req.params.id;
         carsModel.findOne({_id: id}, function (err, car) {
@@ -44,8 +44,8 @@ module.exports = {
     },
 
     /**
-     * carController.create()
-     */
+    * carController.create()
+    */
     create: function (req, res) {
         var car = new carsModel({
 			id : req.body.id,
@@ -71,8 +71,8 @@ module.exports = {
     },
 
     /**
-     * carController.update()
-     */
+    * carController.update()
+    */
     update: function (req, res) {
         var id = req.params.id;
         carsModel.findOne({_id: id}, function (err, car) {
@@ -111,8 +111,8 @@ module.exports = {
     },
 
     /**
-     * carController.remove()
-     */
+    * carController.remove()
+    */
     remove: function (req, res) {
         var id = req.params.id;
         carsModel.findByIdAndRemove(id, function (err, car) {

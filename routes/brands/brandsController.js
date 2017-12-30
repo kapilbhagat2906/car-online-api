@@ -1,15 +1,15 @@
 var brandsModel = require('./brandsModel.js');
 
 /**
- * brandsController.js
- *
- * @description :: Server-side logic for managing brandss.
- */
+* brandsController.js
+*
+* @description :: Server-side logic for managing brandss.
+*/
 module.exports = {
 
     /**
-     * brandsController.list()
-     */
+    * brandsController.list()
+    */
     list: function (req, res) {
         brandsModel.find(function (err, brandss) {
             if (err) {
@@ -23,8 +23,26 @@ module.exports = {
     },
 
     /**
-     * brandsController.show()
-     */
+    * brandsController.listTrending()
+    * return trending/popular brands.
+    */
+    listTrending: (req, res) => {
+        brandsModel.find({isTrending: true})
+        .select('-isTrending')
+        .exec((err, brandss) => {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Error when getting trending brands.',
+                    error: err
+                });
+            }
+            return res.json(brandss);
+        });
+    },
+
+    /**
+    * brandsController.show()
+    */
     show: function (req, res) {
         var id = req.params.id;
         brandsModel.findOne({_id: id}, function (err, brands) {
@@ -44,8 +62,8 @@ module.exports = {
     },
 
     /**
-     * brandsController.create()
-     */
+    * brandsController.create()
+    */
     create: function (req, res) {
         var brands = new brandsModel({
 			id : req.body.id,
@@ -66,8 +84,8 @@ module.exports = {
     },
 
     /**
-     * brandsController.update()
-     */
+    * brandsController.update()
+    */
     update: function (req, res) {
         var id = req.params.id;
         brandsModel.findOne({_id: id}, function (err, brands) {
@@ -101,8 +119,8 @@ module.exports = {
     },
 
     /**
-     * brandsController.remove()
-     */
+    * brandsController.remove()
+    */
     remove: function (req, res) {
         var id = req.params.id;
         brandsModel.findByIdAndRemove(id, function (err, brands) {

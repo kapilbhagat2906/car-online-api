@@ -3,28 +3,33 @@ var router = express.Router();
 var brandsController = require('./brandsController.js');
 
 /*
- * GET
- */
+* GET
+*/
 router.get('/', brandsController.list);
 
 /*
- * GET
- */
+* GET
+*/
+router.get('/trending', brandsController.listTrending);
+
+/*
+* GET
+*/
 router.get('/:id', brandsController.show);
 
 /*
- * POST
- */
+* POST
+*/
 router.post('/', brandsController.create);
 
 /*
- * PUT
- */
+* PUT
+*/
 router.put('/:id', brandsController.update);
 
 /*
- * DELETE
- */
+* DELETE
+*/
 router.delete('/:id', brandsController.remove);
 
 module.exports = router;

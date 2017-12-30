@@ -8,11 +8,10 @@ var carSchema = new Schema({
 	'price' : Number,
 	'info' : String,
 	'field_cover_image' : {
-	 	type: Schema.Types.ObjectId,
-	 	ref: 'urls'
-	},
-	'models' : Array,
-	'related' : Array
+		'xs': String,
+		'sm': String,
+		'lg': String
+	}
 });
 
 module.exports = mongoose.model('car', carSchema);

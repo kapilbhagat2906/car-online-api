@@ -3,28 +3,28 @@ var router = express.Router();
 var carsController = require('./carsController.js');
 
 /*
- * GET
- */
+* GET
+*/
 router.get('/getAll', carsController.list);
 
 /*
- * GET
- */
+* GET
+*/
 router.get('/:id', carsController.show);
 
 /*
- * POST
- */
+* POST
+*/
 router.post('/', carsController.create);
 
 /*
- * PUT
- */
+* PUT
+*/
 router.put('/:id', carsController.update);
 
 /*
- * DELETE
- */
+* DELETE
+*/
 router.delete('/:id', carsController.remove);
 
 module.exports = router;
