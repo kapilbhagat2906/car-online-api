@@ -10,33 +10,39 @@ module.exports = {
     /**
     * modelsController.list()
     */
-    list: function (req, res) {
-        modelsModel.find(function (err, modelss) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when getting models.',
-                    error: err
-                });
-            }
-            return res.json(modelss);
+    list: function () {
+        let promise = new Promise((resolve, reject) => {
+            modelsModel.find(function (err, modelss) {
+                if (err) {
+                    reject({
+                        message: 'Error when getting models.',
+                        error: err
+                    });
+                }
+                resolve(modelss);
+            });
         });
+        return promise;
     },
 
     /**
     * modelsController.listTrending()
     */
-    listTrending: function (req, res) {
-        modelsModel.find({isTrending: true})
-        .select('-isTrending')
-        .exec((err, modelss) => {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when getting models.',
-                    error: err
-                });
-            }
-            return res.json(modelss);
+    listTrending: function () {
+        let promise = new Promise((resolve, reject) => {
+            modelsModel.find({isTrending: true})
+            .select('-isTrending')
+            .exec((err, modelss) => {
+                if (err) {
+                    reject({
+                        message: 'Error when getting models.',
+                        error: err
+                    });
+                }
+                resolve(modelss);
+            });
         });
+        return promise;
     },
 
     /**

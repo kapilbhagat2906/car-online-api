@@ -5,12 +5,28 @@ var brandsController = require('./brandsController.js');
 /*
 * GET
 */
-router.get('/', brandsController.list);
+router.get('/', (req, res) => {
+    let promise = brandsController.list();
+
+    promise.then((response) => {
+        return res.json(response);
+    }, (error) => {
+        return res.status(500).json(response);
+    });
+});
 
 /*
 * GET
 */
-router.get('/trending', brandsController.listTrending);
+router.get('/trending', (req, res) => {
+    let promise = brandsController.listTrending();
+
+    promise.then((response) => {
+        return res.json(response);
+    }, (error) => {
+        return res.status(500).json(error);
+    });
+});
 
 /*
 * GET

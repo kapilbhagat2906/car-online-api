@@ -10,34 +10,40 @@ module.exports = {
     /**
     * brandsController.list()
     */
-    list: function (req, res) {
-        brandsModel.find(function (err, brandss) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when getting brands.',
-                    error: err
-                });
-            }
-            return res.json(brandss);
+    list: function () {
+        let promise = new Promise((resolve, reject) => {
+            brandsModel.find(function (err, brandss) {
+                if (err) {
+                    reject ({
+                        message: 'Error when getting brands.',
+                        error: err
+                    });
+                }
+                resolve(brandss);
+            });
         });
+        return promise;
     },
 
     /**
     * brandsController.listTrending()
     * return trending/popular brands.
     */
-    listTrending: (req, res) => {
-        brandsModel.find({isTrending: true})
-        .select('-isTrending')
-        .exec((err, brandss) => {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when getting trending brands.',
-                    error: err
-                });
-            }
-            return res.json(brandss);
+    listTrending: () => {
+        let promise = new Promise((resolve, reject) => {
+            brandsModel.find({isTrending: true})
+            .select('-isTrending')
+            .exec((err, brandss) => {
+                if (err) {
+                    reject ({
+                        message: 'Error when getting trending brands.',
+                        error: err
+                    });
+                }
+                resolve(brandss);
+            });
         });
+        return promise;
     },
 
     /**

@@ -10,18 +10,21 @@ module.exports = {
     /**
     * highlightsController.list()
     */
-    list: function (req, res) {
-        highlightsModel.find()
-        .select('-_id -__v')
-        .exec((err, highlightss) => {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when getting highlights.',
-                    error: err
-                });
-            }
-            return res.json(highlightss);
+    list: function () {
+        let promise = new Promise((resolve, reject) => {
+            highlightsModel.find()
+            .select('-_id -__v')
+            .exec((err, highlightss) => {
+                if (err) {
+                    reject({
+                        message: 'Error when getting highlights.',
+                        error: err
+                    });
+                }
+                resolve(highlightss);
+            });
         });
+        return promise;
     },
 
     /**

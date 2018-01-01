@@ -8,12 +8,14 @@ var mongodb = require('./mongoose');
 
 mongodb.init();
 
-var cars = require('./routes/cars/carsRoutes');
 var brands = require('./routes/brands/brandsRoutes');
+var cars = require('./routes/cars/carsRoutes');
+var colors = require('./routes/colors/colorsRoutes');
 var highlights = require('./routes/highlights/highlightsRoutes');
+var home = require('./routes/home/homeRoutes');
 var models = require('./routes/models/modelsRoutes');
 var variants = require('./routes/variants/variantsRoutes');
-var colors = require('./routes/colors/colorsRoutes');
+
 
 var app = express();
 
@@ -32,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/cars', cars);
 app.use('/brands', brands);
 app.use('/api/highlights', highlights);
+app.use('/api/home', home);
 app.use('/models', models);
 app.use('/variants', variants);
 app.use('/colors', colors);

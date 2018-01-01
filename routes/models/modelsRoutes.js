@@ -5,12 +5,30 @@ var modelsController = require('./modelsController.js');
 /*
 * GET
 */
-router.get('/', modelsController.list);
+router.get('/', () => {
+    let promise = modelsController.list();
+
+    promise.then((response) => {
+        console.log(response);
+        return res.json(response);
+    }, (error) => {
+        return res.json(error);
+    });
+});
 
 /*
 * GET
 */
-router.get('/trending', modelsController.listTrending);
+router.get('/trending', (req, res) => {
+    let promise = modelsController.listTrending();
+
+    promise.then((response) => {
+        console.log(response);
+        return res.json(response);
+    }, (error) => {
+        return res.json(error);
+    });
+});
 
 /*
 * GET

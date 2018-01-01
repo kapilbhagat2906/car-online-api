@@ -5,7 +5,15 @@ var highlightsController = require('./highlightsController.js');
 /*
 * GET
 */
-router.get('/', highlightsController.list);
+router.get('/', (req, res) => {
+    let promise = highlightsController.list();
+
+    promise.then((response) => {
+        return res.json(response);
+    }, (error) => {
+        return res.status(500).json(error);
+    });
+});
 
 /*
 * GET
