@@ -2,8 +2,7 @@ var colorsModel = require('./colorsModel.js');
 
 var mapper = (obj) => {
     return new colorsModel({
-        modelId: obj.modelId,
-        variantId: obj.variantId,
+        id: obj.id,
         code: obj.code,
         name: obj.name
     });

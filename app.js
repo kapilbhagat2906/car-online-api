@@ -4,11 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 var mongodb = require('./mongoose');
 
 mongodb.init();
 
 var brands = require('./routes/brands/brandsRoutes');
+var brandDetails = require('./routes/brandDetails/brandDetailsRoutes');
 var cars = require('./routes/cars/carsRoutes');
 var colors = require('./routes/colors/colorsRoutes');
 var highlights = require('./routes/highlights/highlightsRoutes');
@@ -30,9 +32,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use((req, res, next) => {
+    if (mongoose.connection && mongoose.connection.readyState === 1) {
+        next();
+    } else {
+        mongodb.init(() => {
+            next();
+        }, next);
+    }
+});
 
 app.use('/cars', cars);
 app.use('/brands', brands);
+app.use('/brandDetails', brandDetails);
 app.use('/api/highlights', highlights);
 app.use('/api/home', home);
 app.use('/models', models);

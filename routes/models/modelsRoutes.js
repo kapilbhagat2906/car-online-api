@@ -5,7 +5,7 @@ var modelsController = require('./modelsController.js');
 /*
 * GET
 */
-router.get('/', () => {
+router.get('/', (req, res) => {
     let promise = modelsController.list();
 
     promise.then((response) => {
