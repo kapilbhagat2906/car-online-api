@@ -16,6 +16,7 @@ var colors = require('./routes/colors/colorsRoutes');
 var highlights = require('./routes/highlights/highlightsRoutes');
 var home = require('./routes/home/homeRoutes');
 var models = require('./routes/models/modelsRoutes');
+var modelDetails = require('./routes/modelDetails/modelDetailsRoutes');
 var variants = require('./routes/variants/variantsRoutes');
 
 
@@ -44,11 +45,12 @@ app.use((req, res, next) => {
 
 app.use('/cars', cars);
 app.use('/brands', brands);
-app.use('/brandDetails', brandDetails);
+app.use('/api/brandDetails', brandDetails);
 app.use('/api/highlights', highlights);
 app.use('/api/home', home);
-app.use('/models', models);
-app.use('/variants', variants);
+app.use('/api/models', models);
+app.use('/api/modelDetails', modelDetails);
+app.use('/api/variants', variants);
 app.use('/colors', colors);
 
 // catch 404 and forward to error handler

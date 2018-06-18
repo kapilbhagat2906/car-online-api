@@ -1,4 +1,5 @@
 var modelsModel = require('./modelsModel.js');
+var moment = require('moment');
 
 var mapper = (obj) => {
     return new modelsModel({
@@ -7,7 +8,8 @@ var mapper = (obj) => {
         code: obj.code,
         name: obj.name,
         launchStatus: obj.launchStatus,
-        isTrending: (obj.trending === true || obj.trending === 'true' || obj.trending === 'TRUE')
+        isTrending: (obj.trending === true || obj.trending === 'true' || obj.trending === 'TRUE'),
+        launchDate: (obj.launchDate && moment(obj.launchDate, 'DD/MM/YYYY'))
     });
 };
 

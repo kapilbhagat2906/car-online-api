@@ -31,7 +31,18 @@ router.get('/trending', (req, res) => {
 /*
 * GET
 */
-router.get('/:id', brandsController.show);
+router.get('/:id', () => {
+    let id = req.params.id;
+    let promise = brandsController.show(id);
+
+    promise.then((response) => {
+        return res.json(response);
+    }, (error) => {
+        if (error.statusCode || error.statusCode === 0) {
+            return res.status(error.statusCode).json(error);
+        }
+    });
+});
 
 /*
 * POST

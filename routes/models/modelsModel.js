@@ -7,7 +7,8 @@ var modelsSchema = new Schema({
 	'name' : String,
 	'code' : String,
 	'launchStatus' : String,
-	'isTrending' : Boolean
+	'isTrending' : Boolean,
+	'launchDate': Date
 });
 
 module.exports = mongoose.model('models', modelsSchema);

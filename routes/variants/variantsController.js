@@ -44,6 +44,27 @@ module.exports = {
     },
 
     /**
+    * variantsController.show()
+    */
+    variantsForModel: function (req, res) {
+        var id = req.params.id;
+        variantsModel.find({ modelId: id }, function (err, variants) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Error when getting variants.',
+                    error: err
+                });
+            }
+            if (!variants) {
+                return res.status(404).json({
+                    message: 'No such variants'
+                });
+            }
+            return res.json(variants);
+        });
+    },
+
+    /**
     * variantsController.create()
     */
     create: function (req, res) {

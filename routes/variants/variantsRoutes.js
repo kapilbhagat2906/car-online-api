@@ -13,6 +13,11 @@ router.get('/', variantsController.list);
 router.get('/:id', variantsController.show);
 
 /*
+* GET
+*/
+router.get('/modelVariants/:id', variantsController.variantsForModel);
+
+/*
 * POST
 */
 router.post('/', variantsController.create);

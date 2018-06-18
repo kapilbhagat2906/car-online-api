@@ -4,11 +4,11 @@ var Schema   = mongoose.Schema;
 var highlightsSchema = new Schema({
     'itemId' : String,
     'itemType' : String,
-    'infoLink' : String,
-    'field_image' : {
-        'xs' : String,
-        'sm' : String,
-        'lg' : String
+    'field_image' : String,
+    'info': {
+        'link': String,
+        'caption': String,
+        'details': String
     }
 });
 

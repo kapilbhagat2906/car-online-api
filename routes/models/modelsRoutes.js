@@ -36,7 +36,16 @@ router.get('/brandModels', modelsController.listBrandModels);
 /*
 * GET
 */
-router.get('/:id', modelsController.show);
+router.get('/:id', (req, res) => {
+    var id = req.params.id,
+        promise = modelsController.show(id);
+
+    promise.then((response) => {
+        return res.json(response);
+    }, (error) => {
+        return res.status(500).json(error);
+    });
+});
 
 /*
 * POST

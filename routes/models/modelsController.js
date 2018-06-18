@@ -68,22 +68,20 @@ module.exports = {
     /**
     * modelsController.show()
     */
-    show: function (req, res) {
-        var id = req.params.id;
-        modelsModel.findOne({_id: id}, function (err, models) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when getting models.',
-                    error: err
-                });
-            }
-            if (!models) {
-                return res.status(404).json({
-                    message: 'No such models'
-                });
-            }
-            return res.json(models);
+    show: function (id) {
+        let promise = new Promise((resolve, reject) => {
+            modelsModel.findOne({id: id})
+            .exec((err, model) => {
+                if (err) {
+                    reject ({
+                        message: 'Error when getting models.',
+                        error: err
+                    });
+                }
+                resolve(model);
+            });
         });
+        return promise;
     },
 
     /**

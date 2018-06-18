@@ -49,22 +49,19 @@ module.exports = {
     /**
     * brandsController.show()
     */
-    show: function (req, res) {
-        var id = req.params.id;
-        brandsModel.findOne({_id: id}, function (err, brands) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when getting brands.',
-                    error: err
-                });
-            }
-            if (!brands) {
-                return res.status(404).json({
-                    message: 'No such brands'
-                });
-            }
-            return res.json(brands);
+    show: function (brandId) {
+        let promise = new Promise((resolve, reject) => {
+            brandsModel.findOne({_id: id}, (err, brandss) => {
+                if (err) {
+                    reject ({
+                        message: 'Error when getting trending brands.',
+                        error: err
+                    });
+                }
+                resolve(brandss);
+            });
         });
+        return promise;
     },
 
     /**
